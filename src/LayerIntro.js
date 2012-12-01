@@ -81,7 +81,7 @@ var LayerIntro = cc.Layer.extend({
         if(posEnemigo <= -this.enemigo.getContentSize().width/2)
         {
             posEnemigo = size.width + this.enemigo.getContentSize().width/2;
-            var posY = Math.floor((Math.random()*size.height)) - this.enemigo.getContentSize.height/2;
+            var posY = Math.floor((Math.random()*size.height)) - this.enemigo.getContentSize().height/2;
             this.enemigo.setPositionY(posY);
         }
         this.enemigo.setPositionX(posEnemigo);
