@@ -27,7 +27,9 @@
 var LayerIntro = cc.Layer.extend({
     tiempoTotal:0,
     nave:null,
-    velocidad:10,
+    velocidad:0,
+    enemigo:0,
+    velocidadEnemigo:-150,
 
     init:function ()
     {
@@ -54,6 +56,12 @@ var LayerIntro = cc.Layer.extend({
         this.addChild(nave);
         this.nave = nave;
 
+        var enemigo = cc.Sprite.create("resources/enemy.png");
+        var posY = Math.floor((Math.random()*size.height-enemigo.getContentSize.height/2));
+        enemigo.setPosition(cc.p(size.width + enemigo.getContentSize().width/2,posY));
+        this.addChild(enemigo);
+        this.enemigo = enemigo;
+
         this.scheduleUpdate();
         
         return true;
@@ -62,10 +70,21 @@ var LayerIntro = cc.Layer.extend({
     update:function(dt)
     {
         this.tiempoTotal += dt;
+        var size = cc.Director.getInstance().getWinSize();
 
         var pos = this.nave.getPositionY()+this.velocidad*dt;
 
         this.nave.setPositionY(pos);
+
+        var posEnemigo = this.enemigo.getPositionX()+this.velocidadEnemigo*dt;
+
+        if(posEnemigo <= -this.enemigo.getContentSize().width/2)
+        {
+            posEnemigo = size.width + this.enemigo.getContentSize().width/2;
+            var posY = Math.floor((Math.random()*size.height)) - this.enemigo.getContentSize.height/2;
+            this.enemigo.setPositionY(posY);
+        }
+        this.enemigo.setPositionX(posEnemigo);
     },
 
     onKeyUp:function(evt)
@@ -78,12 +97,12 @@ var LayerIntro = cc.Layer.extend({
         if(evt == 40)
         {
             //abajo creo
-            this.velocidad = -50;
+            this.velocidad = -150;
         }
         else if(evt == 38)
         {
             //arriba creo
-            this.velocidad = 50;
+            this.velocidad = 150;
         }
     },
 
