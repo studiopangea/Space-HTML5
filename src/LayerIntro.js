@@ -26,14 +26,15 @@
 
 var LayerIntro = cc.Layer.extend({
     tiempoTotal:0,
-    menu:null,
-    play:null,
+    nave:null,
 
     init:function ()
     {
         //////////////////////////////
         // 1. super init first
         this._super();
+
+        this.setKeyboardEnabled(true);
 
         this.setTouchEnabled(true);
 
@@ -46,6 +47,10 @@ var LayerIntro = cc.Layer.extend({
         var ground = cc.Sprite.create("resources/ground.png");
         ground.setPosition(cc.p(size.width/2,ground.getContentSize().height/2));
         this.addChild(ground);
+
+        var nave = cc.Sprite.create("resources/ship.png");
+        nave.setPosition(cc.p(size.width*0.15,size.height/2));
+        this.addChild(nave);
         
         return true;
     },
@@ -53,7 +58,18 @@ var LayerIntro = cc.Layer.extend({
     update:function(dt)
     {
         this.tiempoTotal += dt;
-        t
+    },
+
+    onKeyDown:function(evt)
+    {
+        if(evt == 40)
+        {
+            //arriba creo
+        }
+        else if(evt == 38)
+        {
+            //abajo creo
+        }
     },
 
     registerWithTouchDispatcher:function()
