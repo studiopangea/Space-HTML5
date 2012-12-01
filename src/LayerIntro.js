@@ -42,6 +42,10 @@ var LayerIntro = cc.Layer.extend({
         var fondo = cc.Sprite.create("resources/sunset.jpg");
         fondo.setPosition(cc.p(size.width/2,size.height/2));
         this.addChild(fondo);
+
+        var ground = cc.Sprite.create("resources/ground.png");
+        ground.setPosition(cc.p(size.width/2,ground.getContentSize().height/2));
+        this.addChild(ground);
         
         return true;
     },
