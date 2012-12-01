@@ -24,7 +24,7 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-var LayerIntro = cc.LayerColor.extend({
+var LayerIntro = cc.Layer.extend({
     tiempoTotal:0,
     menu:null,
     play:null,
@@ -37,8 +37,11 @@ var LayerIntro = cc.LayerColor.extend({
 
         this.setTouchEnabled(true);
 
-        this.setColor(cc.c3b(216, 236, 212));
+        var size = cc.Director.getInstance().getWinSize();
 
+        var fondo = cc.Sprite.create("resources/sunset.jpg");
+        fondo.setPosition(cc.p(size.width/2,size.height/2));
+        this.addChild(fondo);
         
         return true;
     },
