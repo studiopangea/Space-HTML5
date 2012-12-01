@@ -27,6 +27,7 @@
 var LayerIntro = cc.Layer.extend({
     tiempoTotal:0,
     nave:null,
+    velocidad:10,
 
     init:function ()
     {
@@ -51,6 +52,9 @@ var LayerIntro = cc.Layer.extend({
         var nave = cc.Sprite.create("resources/ship.png");
         nave.setPosition(cc.p(size.width*0.15,size.height/2));
         this.addChild(nave);
+        this.nave = nave;
+
+        this.scheduleUpdate();
         
         return true;
     },
@@ -58,17 +62,28 @@ var LayerIntro = cc.Layer.extend({
     update:function(dt)
     {
         this.tiempoTotal += dt;
+
+        var pos = this.nave.getPositionY()+this.velocidad*dt;
+
+        this.nave.setPositionY(pos);
+    },
+
+    onKeyUp:function(evt)
+    {
+        this.velocidad = 0;
     },
 
     onKeyDown:function(evt)
     {
         if(evt == 40)
         {
-            //arriba creo
+            //abajo creo
+            this.velocidad = -50;
         }
         else if(evt == 38)
         {
-            //abajo creo
+            //arriba creo
+            this.velocidad = 50;
         }
     },
 
